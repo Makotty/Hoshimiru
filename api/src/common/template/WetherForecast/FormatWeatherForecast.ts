@@ -6,14 +6,16 @@ import { getWeatherForecastData } from "./GetWeatherForecast";
 import type { WeatherType } from "./types/weather.type";
 import type { WeatherArrayType } from "./types/weatherArray.type";
 
-export const formatWeatherForecastData = async (event: WebhookEvent) => {
+export const formatWeatherForecastData = async (
+  event: WebhookEvent
+): Promise<WeatherArrayType> => {
   const weathers: AxiosResponse<any> = await getWeatherForecastData(event);
 
   const weather: WeatherType = weathers.data.daily[0];
 
-  const UnixToday: number = weather.dt;
-  const convertUnixToday: Date = new Date(UnixToday * 1000);
-  const today: string = convertUnixToday.toLocaleDateString("ja-jp");
+  const UNIXToday: number = weather.dt;
+  const convertUNIXToday: Date = new Date(UNIXToday * 1000);
+  const today: string = convertUNIXToday.toLocaleDateString("ja-JP");
 
   const weatherForecast: string = weather.weather[0].description;
 

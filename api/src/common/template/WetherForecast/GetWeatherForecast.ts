@@ -1,5 +1,7 @@
 import { WebhookEvent } from "@line/bot-sdk";
 import axios, { AxiosResponse } from "axios";
+import dotenv from "dotenv";
+require("dotenv").config();
 
 export const getWeatherForecastData = async (
   event: WebhookEvent
@@ -15,7 +17,7 @@ export const getWeatherForecastData = async (
     const openWeatherAPI: string | undefined =
       process.env.OPENWEATHER_API_KEY || "";
 
-    const openWeatherURL: string = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=metric&lang=ja&appid=${openWeatherAPI}`;
+    const openWeatherURL: string = `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&units=metric&lang=ja&appid=${openWeatherAPI}`;
 
     const weatherData: AxiosResponse<any> = await axios.get(openWeatherURL);
     return weatherData;
