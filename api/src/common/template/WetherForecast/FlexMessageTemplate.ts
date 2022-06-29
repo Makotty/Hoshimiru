@@ -1,8 +1,9 @@
 import { WebhookEvent, FlexMessage } from "@line/bot-sdk";
-import e from "express";
 import { formatWeatherForecastData } from "./FormatWeatherForecast";
 
-export const FlexMessageTemplate = async (event: WebhookEvent) => {
+export const FlexMessageTemplate = async (
+  event: WebhookEvent
+): Promise<FlexMessage> => {
   const data = await formatWeatherForecastData(event);
 
   return {
@@ -12,7 +13,7 @@ export const FlexMessageTemplate = async (event: WebhookEvent) => {
       type: "bubble",
       header: {
         type: "box",
-        layuot: "vertical",
+        layout: "vertical",
         contents: [
           {
             type: "text",
@@ -24,23 +25,23 @@ export const FlexMessageTemplate = async (event: WebhookEvent) => {
         ],
       },
       hero: {
-        type: Image,
+        type: "image",
         url: data.imageURL,
         size: "full",
       },
       body: {
         type: "box",
-        kayout: "vertical",
+        layout: "vertical",
         contents: [
           {
             type: "text",
-            text: `天気は「${data.weatherForecast}」です`,
+            text: `天気は、「${data.weatherForecast}」です`,
             weight: "bold",
             align: "center",
           },
           {
             type: "text",
-            text: `○体感気温`,
+            text: "■体感気温",
             margin: "lg",
           },
           {
