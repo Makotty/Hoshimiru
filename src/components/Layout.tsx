@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
-import Footer from './Footer'
 import Header from './Header'
+import Footer from './Footer'
 
 type LayoutProps = {
   children: ReactNode
@@ -9,11 +9,11 @@ type LayoutProps = {
 export const Layout = (props: LayoutProps) => {
   const { children } = props
   return (
-    <body className="bg-gray-800">
+    <div className="bg-gray-800">
       <Header />
       <main>{children}</main>
       <Footer />
-    </body>
+    </div>
   )
 }
 
