@@ -9,7 +9,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/current-location/" element={<CurrentLocation />} />
-        <Route path="/specifield/" element={<SpecifiedPosition />} />
+        <Route path="/specified-position/" element={<SpecifiedPosition />} />
       </Routes>
     </BrowserRouter>
   )
