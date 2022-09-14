@@ -4,7 +4,9 @@ function App() {
   return (
     <Layout>
       <div>
-        <h1 className="text-3xl font-bold underline">Hello world!</h1>
+        <h1 className="text-2xl font-serif text-white">
+          どこから見える星を表示しますか？
+        </h1>
       </div>
     </Layout>
   )
