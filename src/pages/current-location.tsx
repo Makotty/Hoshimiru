@@ -17,7 +17,6 @@ const CurrentLocation = () => {
 
   useEffect(() => {
     const newDate = new Date()
-    // console.log(newDate)
 
     const date = `${newDate.getFullYear()}-${
       newDate.getMonth() + 1
@@ -46,15 +45,17 @@ const CurrentLocation = () => {
   }, [])
 
   return (
-    <Layout>
-      <div>
-        <h1 className="text-2xl font-serif text-white">
-          現在地から見える星を表示します。
-        </h1>
-        <p className="text-white">{getLat}</p>
-        <p className="text-white">{getLng}</p>
-      </div>
-    </Layout>
+    <>
+      <Layout>
+        <div className="text-center">
+          <h2 className="my-8 text-xl font-serif text-white">
+            現在地から見える星座を表示します。
+          </h2>
+          <p className="text-white">緯度 : {getLat}</p>
+          <p className="text-white">軽度 : {getLng}</p>
+        </div>
+      </Layout>
+    </>
   )
 }
 
