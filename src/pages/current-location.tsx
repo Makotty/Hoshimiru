@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
+import axios from 'axios'
 import Layout from '../components/Layout'
 
 const CurrentLocation = () => {
-  const [getLat, setGetLat] = useState<number>()
-  const [getLng, setGetLng] = useState<number>()
+  const [getLat, setGetLat] = useState<number>(35.18028)
+  const [getLng, setGetLng] = useState<number>(136.90667)
 
   if (!navigator.geolocation) {
     alert('あなたの端末では現在地を取得することができません')
@@ -15,6 +16,15 @@ const CurrentLocation = () => {
   }
 
   useEffect(() => {
+    const newDate = new Date()
+    // console.log(newDate)
+
+    const date = `${newDate.getFullYear()}-${
+      newDate.getMonth() + 1
+    }-${newDate.getDate()}`
+
+    const hour = newDate.getHours()
+    const min = newDate.getMinutes()
     navigator.geolocation.getCurrentPosition(
       GetLocation,
       () => {
@@ -23,7 +33,16 @@ const CurrentLocation = () => {
       { enableHighAccuracy: true }
     )
 
-    
+    axios
+      .get(
+        `https://livlog.xyz/hoshimiru/constellation?lat=${getLat}&lng=${getLng}&date=${date}&hour=${hour}&min=${min}`
+      )
+      .then((response) => {
+        console.log(response)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }, [])
 
   return (
