@@ -1,11 +1,5 @@
-import Layout from '../components/Layout'
+import HomeObject from '../container/HomeObject'
 
-const Home = () => (
-  <Layout>
-    <div className="flex justify-center ">
-      <h1 className="text-2xl font-serif text-white">Hoshimiru</h1>
-    </div>
-  </Layout>
-)
+const Home = () => <HomeObject />
 
 export default Home
