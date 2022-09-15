@@ -20,7 +20,7 @@ export const Header = () => {
           className="mr-3 px-3 hover:bg-gray-600 rounded transition"
           type="button"
           onClick={() => {
-            navigate('/current-location/')
+            navigate('/current-location')
           }}
         >
           現在地
@@ -29,7 +29,7 @@ export const Header = () => {
           className="px-3 hover:bg-gray-600 rounded transition"
           type="button"
           onClick={() => {
-            navigate('/specified-position/')
+            navigate('/specified-position')
           }}
         >
           指定位置

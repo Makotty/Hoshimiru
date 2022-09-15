@@ -153,7 +153,7 @@ const HomeObject = () => {
 
     window.addEventListener('click', () => {
       if (currentIntersect) {
-        navigate('/current-location/')
+        navigate('/current-location')
       }
     })
 
