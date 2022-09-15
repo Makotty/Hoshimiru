@@ -60,8 +60,6 @@ const CurrentLocation = () => {
       .then((response: WeatherResponseTypes) => {
         setWeatherRes(response)
         setWeatherJp(weatherChange(response))
-
-        console.log(response)
       })
       .catch((error) => {
         console.log(error)
