@@ -13,12 +13,14 @@
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-geocode": "^0.2.3",
-    "react-router-dom": "^6.4.0"
+    "react-router-dom": "^6.4.0",
+    "three": "^0.144.0"
   },
   "devDependencies": {
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-geocode": "^0.2.1",
+    "@types/three": "^0.144.0",
     "@typescript-eslint/eslint-plugin": "^5.3.0",
     "@typescript-eslint/parser": "^5.3.0",
     "@vitejs/plugin-react": "^1.0.0",
