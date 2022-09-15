@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 
 export const Header = () => {
-  const nagigate = useNavigate()
+  const navigate = useNavigate()
 
   return (
     <header className="bg-gray-900 py-5 flex justify-between">
@@ -11,7 +11,7 @@ export const Header = () => {
           className="mr-3 px-3 hover:bg-gray-600 rounded transition"
           type="button"
           onClick={() => {
-            nagigate('/')
+            navigate('/')
           }}
         >
           ホーム
@@ -20,7 +20,7 @@ export const Header = () => {
           className="mr-3 px-3 hover:bg-gray-600 rounded transition"
           type="button"
           onClick={() => {
-            nagigate('/current-location/')
+            navigate('/current-location/')
           }}
         >
           現在地
@@ -29,7 +29,7 @@ export const Header = () => {
           className="px-3 hover:bg-gray-600 rounded transition"
           type="button"
           onClick={() => {
-            nagigate('/specified-position/')
+            navigate('/specified-position/')
           }}
         >
           指定位置
