@@ -2,9 +2,12 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import * as THREE from 'three'
 
-import { TextGeometry } from '../lib/TextGeometry.js'
-import { FontLoader } from '../lib/FontLoader.js'
-import { OrbitControls } from '../lib/OrbitControls.js'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader'
+import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry'
+
+import matcap1 from '../images/texture/matcaps/1.png'
+import matcap3 from '../images/texture/matcaps/3.png'
 
 const HomeObject = () => {
   const navigate = useNavigate()
@@ -153,7 +156,7 @@ const HomeObject = () => {
 
     window.addEventListener('click', () => {
       if (currentIntersect) {
-        navigate('/current-location')
+        navigate('/current-location/')
       }
     })
 
@@ -203,17 +206,13 @@ const HomeObject = () => {
      * Texture
      */
     const textureLoader = new THREE.TextureLoader()
-    const matcapTexture = textureLoader.load(
-      '/src/images/texture/matcaps/3.png'
-    )
+    const matcapTexture = textureLoader.load(matcap3)
 
     const textMaterial = new THREE.MeshMatcapMaterial({
       matcap: matcapTexture
     })
 
-    const clickTextTexture = textureLoader.load(
-      '/src/images/texture/matcaps/1.png'
-    )
+    const clickTextTexture = textureLoader.load(matcap1)
 
     const clickTextMaterial = new THREE.MeshMatcapMaterial({
       matcap: clickTextTexture
@@ -224,66 +223,63 @@ const HomeObject = () => {
      */
     const fontLoader = new FontLoader()
 
-    fontLoader.load(
-      '/src/fonts/droid/droid_serif_regular.typeface.json',
-      (font) => {
-        const textGeometry = new TextGeometry('Hoshimiru.', {
-          font,
-          size: 0.7,
-          height: 0.2,
-          curveSegments: 12,
-          bevelEnabled: true,
-          bevelThickness: 0.03,
-          bevelSize: 0.02,
-          bevelOffset: 0,
-          bevelSegments: 5
-        })
-        textGeometry.center()
+    fontLoader.load('/fonts/droid_serif_regular.typeface.json', (font) => {
+      const textGeometry = new TextGeometry('Hoshimiru.', {
+        font,
+        size: 0.7,
+        height: 0.2,
+        curveSegments: 12,
+        bevelEnabled: true,
+        bevelThickness: 0.03,
+        bevelSize: 0.02,
+        bevelOffset: 0,
+        bevelSegments: 5
+      })
+      textGeometry.center()
 
-        const clickTextGeometry = new TextGeometry('Click', {
-          font,
-          size: 0.35,
-          height: 0.2,
-          curveSegments: 12,
-          bevelEnabled: true,
-          bevelThickness: 0.03,
-          bevelSize: 0.02,
-          bevelOffset: 0,
-          bevelSegments: 5
-        })
-        clickTextGeometry.center()
+      const clickTextGeometry = new TextGeometry('Click', {
+        font,
+        size: 0.35,
+        height: 0.2,
+        curveSegments: 12,
+        bevelEnabled: true,
+        bevelThickness: 0.03,
+        bevelSize: 0.02,
+        bevelOffset: 0,
+        bevelSegments: 5
+      })
+      clickTextGeometry.center()
 
-        const text = new THREE.Mesh(textGeometry, textMaterial)
-        text.position.y = 2.5
-        const clickText = new THREE.Mesh(clickTextGeometry, clickTextMaterial)
-        clickText.position.y = 1.25
+      const text = new THREE.Mesh(textGeometry, textMaterial)
+      text.position.y = 2.5
+      const clickText = new THREE.Mesh(clickTextGeometry, clickTextMaterial)
+      clickText.position.y = 1.25
 
-        scene.add(text)
-        scene.add(clickText)
+      scene.add(text)
+      scene.add(clickText)
 
-        const clock = new THREE.Clock()
+      const clock = new THREE.Clock()
 
-        const tick = () => {
-          const elapsedTime = clock.getElapsedTime()
+      const tick = () => {
+        const elapsedTime = clock.getElapsedTime()
 
-          text.rotation.y = elapsedTime * -0.5
-          window.requestAnimationFrame(tick)
+        text.rotation.y = elapsedTime * -0.5
+        window.requestAnimationFrame(tick)
 
-          raycaster.setFromCamera(mouse, camera)
+        raycaster.setFromCamera(mouse, camera)
 
-          const objectsToTest = [clickText]
-          const intersects = raycaster.intersectObjects(objectsToTest)
+        const objectsToTest = [clickText]
+        const intersects = raycaster.intersectObjects(objectsToTest)
 
-          if (intersects.length) {
-            currentIntersect = intersects
-          } else {
-            currentIntersect = null
-          }
+        if (intersects.length) {
+          currentIntersect = intersects
+        } else {
+          currentIntersect = null
         }
-
-        tick()
       }
-    )
+
+      tick()
+    })
 
     /**
      * Animation
