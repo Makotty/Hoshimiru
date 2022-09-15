@@ -14,7 +14,7 @@ export const Header = () => {
             navigate('/')
           }}
         >
-          ホーム
+          TOP
         </button>
         <button
           className="mr-3 px-3 hover:bg-gray-600 rounded transition"
