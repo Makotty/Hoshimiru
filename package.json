@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build && mkdir dist/fonts && cp -f ./fonts/droid/droid_serif_regular.typeface.json ./dist/fonts",
     "serve": "vite preview"
   },
   "dependencies": {
