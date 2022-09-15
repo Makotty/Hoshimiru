@@ -2,9 +2,9 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import * as THREE from 'three'
 
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js'
-import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js'
+import { TextGeometry } from '../lib/TextGeometry.js'
+import { FontLoader } from '../lib/FontLoader.js'
+import { OrbitControls } from '../lib/OrbitControls.js'
 
 const HomeObject = () => {
   const navigate = useNavigate()
