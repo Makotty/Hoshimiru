@@ -2,12 +2,17 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Layout from '../components/Layout'
 import { SignResponseTypes } from '../types/SignResponse.'
+import { WeatherResponseTypes } from '../types/WeatherResponse'
+import weatherChange from '../lib/WeatherJapanesFormat'
 
 const CurrentLocation = () => {
   const [getLat, setGetLat] = useState<number>(35.18028)
   const [getLng, setGetLng] = useState<number>(136.90667)
 
   const [signRes, setSignRes] = useState<SignResponseTypes>()
+
+  const [weatherRes, setWeatherRes] = useState<WeatherResponseTypes>()
+  const [weatherJp, setWeatherJp] = useState<string>()
 
   if (!navigator.geolocation) {
     alert('あなたの端末では現在地を取得することができません')
@@ -45,16 +50,54 @@ const CurrentLocation = () => {
       .catch((error) => {
         console.log(error)
       })
+
+    axios
+      .get(
+        `https://api.openweathermap.org/data/2.5/onecall?lat=${getLat}&lon=${getLng}&exclude=minutely,hourly,daily,alerts&units=metric&appid=${
+          import.meta.env.VITE_OPEN_WEATHER_API_KEY
+        }`
+      )
+      .then((response: WeatherResponseTypes) => {
+        setWeatherRes(response)
+        setWeatherJp(weatherChange(response))
+
+        console.log(response)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }, [])
 
   return (
     <Layout>
-      <div className="text-center flex justify-center items-center flex-col">
+      <div className="flex justify-center items-center flex-col">
         <h2 className="my-8 text-xl font-serif text-white">
           現在地から見える星座を表示します。
         </h2>
-        <p className="text-white">緯度 : {getLat}</p>
-        <p className="text-white">軽度 : {getLng}</p>
+
+        <div className="bg-gray-100 md:w-2/4 w-4/5 max-w-3xl p-4  rounded">
+          <p className="text-xl pb-2">天候</p>
+          <div className="flex">
+            <div className="w-fit h-fit bg-gray-300 rounded">
+              <img
+                className="w-16"
+                src={`http://openweathermap.org/img/wn/${
+                  weatherRes?.data.current.weather[0].icon || ''
+                }@2x.png`}
+                alt="天気のアイコン"
+              />
+            </div>
+            <div className="ml-4">
+              <h2>天気：{weatherJp}</h2>
+              <p>温度：{weatherRes?.data.current.temp}℃</p>
+              <p>湿度：{weatherRes?.data.current.humidity}%</p>
+              <p>空の曇り度：{weatherRes?.data.current.clouds}%</p>
+              <p>平均視程：{weatherRes?.data.current.visibility}m</p>
+              <p>風速：{weatherRes?.data.current.wind_speed}m/s</p>
+            </div>
+            <div />
+          </div>
+        </div>
 
         {signRes &&
           signRes.data.result.map((data) => (
@@ -84,11 +127,11 @@ const CurrentLocation = () => {
                       {data.enName}
                     </span>
                   </span>
-                  <span className="text-left">{data.content}</span>
+                  <span>{data.content}</span>
                 </figcaption>
               </figure>
 
-              <p className="text-sm text-left p-4">
+              <p className="text-sm p-4">
                 ストーリー
                 <br />
                 {data.origin}
