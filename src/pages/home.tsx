@@ -1,4 +1,4 @@
-import HomeObject from '../container/HomeObject'
+import HomeObject from '../containers/HomeObject'
 
 const Home = () => <HomeObject />
 
