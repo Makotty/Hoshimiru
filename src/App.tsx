@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import CurrentLocation from './pages/current-location'
 import Home from './pages/home'
+import CurrentLocation from './pages/current-location'
 import SpecifiedPosition from './pages/specified-position'
 
 function App() {
