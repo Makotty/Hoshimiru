@@ -8,8 +8,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/current-location/" element={<CurrentLocation />} />
-        <Route path="/specified-position/" element={<SpecifiedPosition />} />
+        <Route path="/current-location" element={<CurrentLocation />} />
+        <Route path="/specified-position" element={<SpecifiedPosition />} />
       </Routes>
     </BrowserRouter>
   )
