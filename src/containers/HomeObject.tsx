@@ -9,7 +9,7 @@ import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry'
 import matcap1 from '../images/texture/matcaps/1.png'
 import matcap3 from '../images/texture/matcaps/3.png'
 
-import { GalaxyParams } from '../types/GakaxyParameters'
+import { GalaxyParams } from '../types/GalaxyParameters'
 import Resize from '../lib/Resize'
 
 const HomeObject = () => {
