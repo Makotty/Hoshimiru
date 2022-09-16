@@ -9,6 +9,9 @@ import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry'
 import matcap1 from '../images/texture/matcaps/1.png'
 import matcap3 from '../images/texture/matcaps/3.png'
 
+import { GalaxyParams } from '../types/GakaxyParameters'
+import Resize from '../lib/Resize'
+
 const HomeObject = () => {
   const navigate = useNavigate()
   const createBox = () => {
@@ -22,22 +25,10 @@ const HomeObject = () => {
      */
     const scene = new THREE.Scene()
 
-    type Params = {
-      count: number
-      size: number
-      radius: number
-      branches: number
-      spin: number
-      randomness: number
-      randomnessPower: number
-      insideColor: string
-      outsideColor: string
-    }
-
     /**
      * Galaxy
      */
-    const parameters: Params = {
+    const parameters: GalaxyParams = {
       count: 100000,
       size: 0.01,
       radius: 5,
@@ -189,18 +180,7 @@ const HomeObject = () => {
     /**
      * Resize
      */
-    window.addEventListener('resize', () => {
-      // Update Sizes
-      sizes.width = window.innerWidth
-      sizes.height = window.innerHeight
-
-      camera.aspect = sizes.width / sizes.height
-
-      camera.updateProjectionMatrix()
-
-      renderer.setSize(sizes.width, sizes.height)
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-    })
+    Resize({ sizes, camera, renderer })
 
     /**
      * Texture
